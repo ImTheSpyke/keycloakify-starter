@@ -1,0 +1,20 @@
+/**
+ * Login theme stylesheet entry point.
+ *
+ * Loaded lazily from `styleLevelCustomization.tsx` on top of the stock
+ * Keycloak Login v2 (PatternFly) stylesheets.
+ *
+ * Layers, in order:
+ *   1. Montserrat webfont (self-hosted, latin subset only)
+ *   2. tokens.css     — design tokens, the single source of truth for the palette
+ *   3. base.css       — page canvas, typography defaults, shell layout
+ *   4. components.css — overrides for the PatternFly widgets Keycloak renders
+ */
+
+@import "@fontsource/montserrat/latin-400.css";
+@import "@fontsource/montserrat/latin-500.css";
+@import "@fontsource/montserrat/latin-600.css";
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";

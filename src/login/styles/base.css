@@ -1,0 +1,132 @@
+/**
+ * Page canvas, typography defaults and shell layout.
+ *
+ * Scoped under `.pog-theme` (set on <html> by styleLevelCustomization) so the
+ * rules outrank the stock PatternFly selectors without relying on `!important`.
+ */
+
+/* ---------- Canvas ---------- */
+
+/* The canvas hangs off <html>, not <body>: pages such as login-oauth-grant.ftl
+   pass their own bodyClassName, which replaces any class we set on the body,
+   so the body is not a reliable hook. `html.pog-theme` also outranks
+   PatternFly's own `.login-pf` background, which sits on the same element.
+
+   Background layers, front to back:
+     1. the photo, WebP with a PNG fallback for browsers without WebP
+     2. the gradient canvas, shown if the photo is missing, fails to load or
+        is still downloading
+   The background-color underneath guarantees a dark page in every case. */
+html.pog-theme {
+    background-color: var(--pog-canvas);
+    background-image: image-set(
+            url("../assets/background-pog-prod-emea.webp") type("image/webp"),
+            url("../assets/background-pog-prod-emea.png") type("image/png")
+        ),
+        radial-gradient(
+            820px 520px at 50% 8%,
+            var(--pog-brand-wash) 0%,
+            var(--pog-canvas) 52%,
+            var(--pog-canvas-edge) 100%
+        );
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--pog-text);
+    font-family: var(--pog-font);
+    font-weight: var(--pog-weight-regular);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* PatternFly sets a per-page background on the body (`.login-pf body`,
+   `body.oauth`, ...); it has to stay out of the way of the html canvas. */
+html.pog-theme body {
+    min-height: 100vh;
+    margin: 0;
+    background: none !important;
+    color: var(--pog-text);
+    font-family: var(--pog-font);
+}
+
+.pog-theme .login-pf .container {
+    padding-top: 0;
+}
+
+/* ---------- Shell ---------- */
+
+.pog-theme .login-pf-page {
+    max-width: 408px;
+    margin: 0 auto;
+    padding: 0 var(--pog-space-5) 64px;
+}
+
+/* ---------- Realm title ----------
+   Renders realm.displayNameHtml, so it stays editable from the Admin console.
+   Sized as an application label rather than a page heading. */
+
+.pog-theme #kc-header {
+    color: var(--pog-text-muted);
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.pog-theme #kc-header-wrapper {
+    padding: 56px var(--pog-space-3) var(--pog-space-4);
+    font-size: 0.75rem;
+    font-weight: var(--pog-weight-semibold);
+    line-height: 1.4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pog-text-muted);
+    white-space: normal;
+}
+
+/* ---------- Typography defaults ---------- */
+
+.pog-theme h1,
+.pog-theme h2,
+.pog-theme h3,
+.pog-theme .pf-c-title {
+    font-family: var(--pog-font);
+    font-weight: var(--pog-weight-semibold);
+    color: var(--pog-text);
+}
+
+.pog-theme p,
+.pog-theme .instruction {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--pog-text-secondary);
+}
+
+.pog-theme a {
+    color: var(--pog-link);
+    text-decoration: none;
+    transition: color var(--pog-transition);
+}
+
+.pog-theme a:hover {
+    color: var(--pog-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.pog-theme a:focus-visible,
+.pog-theme button:focus-visible {
+    outline: 2px solid var(--pog-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ---------- Motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .pog-theme *,
+    .pog-theme *::before,
+    .pog-theme *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

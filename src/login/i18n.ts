@@ -1,10 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { i18nBuilder } from "keycloakify/login";
+/**
+ * WARNING: Before modifying this file, run the following command:
+ *
+ * $ npx keycloakify own --path "login/i18n.ts"
+ *
+ * This file is provided by @keycloakify/login-ui version 250004.8.0.
+ * It was copied into your repository by the postinstall script: `keycloakify sync-extensions`.
+ */
+
+/* eslint-disable */
+
+import { i18nBuilder } from "@keycloakify/login-ui/i18n";
 import type { ThemeName } from "../kc.gen";
 
 /** @see: https://docs.keycloakify.dev/features/i18n */
-const { useI18n, ofTypeI18n } = i18nBuilder.withThemeName<ThemeName>().build();
+const { I18nProvider, useI18n } = i18nBuilder.withThemeName<ThemeName>().build();
 
-type I18n = typeof ofTypeI18n;
-
-export { useI18n, type I18n };
+export { useI18n, I18nProvider };

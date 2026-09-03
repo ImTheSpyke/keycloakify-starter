@@ -1,0 +1,85 @@
+/**
+ * Design tokens.
+ *
+ * Surfaces are neutral dark greys. The brand palette is deliberately rationed
+ * so it reads as accent rather than as a theme colour:
+ *   #A48EF2  the primary action and the focus ring, nothing else
+ *   #CEC4F9  links only
+ *   #332652  a single low-opacity wash behind the card
+ *
+ * Every other value is derived from these, so the theme can be re-skinned by
+ * editing this file alone.
+ */
+
+.pog-theme {
+    color-scheme: dark;
+
+    /* Surfaces, darkest to lightest — neutral, no palette tint */
+    --pog-canvas: #101013;
+    --pog-canvas-edge: #08080a;
+    --pog-surface: #17171b;
+    --pog-surface-raised: #1e1e23;
+    --pog-surface-hover: #26262c;
+
+    /* Lines */
+    --pog-border: #26262c;
+    --pog-border-strong: #34343c;
+
+    /* Text */
+    --pog-text: #ededf0;
+    --pog-text-secondary: #b6b6bf;
+    --pog-text-muted: #83838f;
+
+    /* Brand wash: the only place #332652 appears, behind the card at low alpha */
+    --pog-brand-wash: rgba(51, 38, 82, 0.5);
+
+    /* Interactive */
+    --pog-link: #cec4f9;
+    --pog-accent: #a48ef2;
+    --pog-accent-hover: #b7a5f5;
+    --pog-accent-active: #8f77e8;
+    --pog-accent-contrast: #14121c;
+    --pog-accent-wash: rgba(164, 142, 242, 0.12);
+    --pog-focus-ring: rgba(164, 142, 242, 0.35);
+
+    /* Status */
+    --pog-danger: #f08d8d;
+    --pog-danger-wash: rgba(240, 141, 141, 0.1);
+    --pog-danger-border: rgba(240, 141, 141, 0.32);
+    --pog-warning: #e6b768;
+    --pog-warning-wash: rgba(230, 183, 104, 0.1);
+    --pog-warning-border: rgba(230, 183, 104, 0.32);
+    --pog-success: #79c9a6;
+    --pog-success-wash: rgba(121, 201, 166, 0.1);
+    --pog-success-border: rgba(121, 201, 166, 0.32);
+
+    /* Typography */
+    --pog-font: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    --pog-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --pog-weight-regular: 400;
+    --pog-weight-medium: 500;
+    --pog-weight-semibold: 600;
+
+    /* Geometry — small radii read as "tool", not "landing page" */
+    --pog-radius-control: 6px;
+    --pog-radius-surface: 10px;
+    --pog-control-height: 40px;
+
+    /* Spacing scale */
+    --pog-space-1: 4px;
+    --pog-space-2: 8px;
+    --pog-space-3: 12px;
+    --pog-space-4: 16px;
+    --pog-space-5: 20px;
+    --pog-space-6: 28px;
+
+    /* Elevation */
+    --pog-shadow-surface: 0 1px 2px rgba(0, 0, 0, 0.32),
+        0 16px 40px -20px rgba(0, 0, 0, 0.65);
+    --pog-shadow-overlay: 0 2px 4px rgba(0, 0, 0, 0.35),
+        0 12px 32px -12px rgba(0, 0, 0, 0.7);
+
+    /* Motion */
+    --pog-transition: 120ms ease;
+}

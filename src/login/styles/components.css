@@ -1,0 +1,756 @@
+/**
+ * Widget-level overrides.
+ *
+ * Each block maps to markup rendered by @keycloakify/login-ui. Selectors are
+ * scoped with `.pog-theme`; `!important` appears only where a PatternFly rule
+ * outranks that scope, since we do not control the vendor stylesheet.
+ */
+
+/* ---------- Card ---------- */
+
+.pog-theme .card-pf {
+    margin: 0;
+    padding: var(--pog-space-6) var(--pog-space-6) var(--pog-space-5);
+    background: var(--pog-surface);
+    border: 1px solid var(--pog-border);
+    border-radius: var(--pog-radius-surface);
+    box-shadow:
+        var(--pog-shadow-surface),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+}
+
+.pog-theme .login-pf-header {
+    margin-bottom: var(--pog-space-5);
+}
+
+.pog-theme #kc-page-title {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: var(--pog-weight-semibold);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--pog-text);
+    text-align: left;
+}
+
+.pog-theme #kc-content-wrapper,
+.pog-theme #kc-form-wrapper {
+    margin-top: 0;
+}
+
+/* Keycloak still wraps some sections in Bootstrap rows/columns. Their gutters
+   and negative margins fight the card's own padding, so flatten both and let
+   the card own the horizontal rhythm. */
+.pog-theme .card-pf .row,
+.pog-theme .card-pf .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.pog-theme .card-pf [class*="col-md-"],
+.pog-theme .card-pf [class*="col-sm-"],
+.pog-theme .card-pf [class*="col-xs-"] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* ---------- Field groups ---------- */
+
+.pog-theme .pf-c-form__group,
+.pog-theme #kc-form-login > div {
+    margin-bottom: var(--pog-space-4);
+}
+
+.pog-theme label,
+.pog-theme .pf-c-form__label {
+    display: inline-block;
+    margin-bottom: var(--pog-space-2);
+    font-size: 0.6875rem;
+    font-weight: var(--pog-weight-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pog-text-muted);
+}
+
+/* Checkbox captions ("remember me", "I have saved these codes", ...) are body
+   copy rather than field labels. Keycloak nests the input inside the label on
+   some pages and puts them side by side on others, hence the three selectors. */
+.pog-theme .checkbox,
+.pog-theme .checkbox label,
+.pog-theme input[type="checkbox"] + label,
+.pog-theme label:has(input[type="checkbox"]) {
+    display: inline;
+    margin-bottom: 0;
+    font-size: 0.8125rem;
+    font-weight: var(--pog-weight-regular);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--pog-text-secondary);
+}
+
+.pog-theme input[type="checkbox"] + label {
+    margin-left: var(--pog-space-2);
+}
+
+/* Bootstrap pulls a nested checkbox out of the text flow with a negative
+   margin and compensates with padding on `.checkbox`; undo both so the box
+   and its caption sit on one line. */
+.pog-theme .checkbox {
+    padding-left: 0;
+}
+
+.pog-theme label input[type="checkbox"] {
+    position: static;
+    display: inline-block;
+    margin: 0 var(--pog-space-2) 0 0;
+}
+
+/* ---------- Text inputs ---------- */
+
+.pog-theme .pf-c-form-control,
+.pog-theme input[type="text"],
+.pog-theme input[type="password"],
+.pog-theme input[type="email"],
+.pog-theme input[type="number"] {
+    width: 100%;
+    height: var(--pog-control-height);
+    padding: 0 var(--pog-space-3);
+    font-family: var(--pog-font);
+    font-size: 0.875rem;
+    color: var(--pog-text);
+    background-color: var(--pog-surface-raised) !important;
+    background-image: none !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-radius: var(--pog-radius-control);
+    box-shadow: none !important;
+    transition:
+        border-color var(--pog-transition),
+        box-shadow var(--pog-transition);
+}
+
+.pog-theme textarea.pf-c-form-control {
+    height: auto;
+    padding: var(--pog-space-3);
+}
+
+.pog-theme .pf-c-form-control:hover:not(:focus) {
+    border-color: var(--pog-accent-active) !important;
+}
+
+.pog-theme .pf-c-form-control:focus {
+    outline: none;
+    border-color: var(--pog-accent) !important;
+    box-shadow: 0 0 0 3px var(--pog-focus-ring) !important;
+}
+
+.pog-theme .pf-c-form-control::placeholder {
+    color: var(--pog-text-muted);
+}
+
+.pog-theme .pf-c-form-control[aria-invalid="true"] {
+    border-color: var(--pog-danger) !important;
+}
+
+/* Read-only profile fields, e.g. attributes mapped from an identity provider. */
+.pog-theme .pf-c-form-control:disabled,
+.pog-theme .pf-c-form-control[readonly] {
+    color: var(--pog-text-muted);
+    background-color: var(--pog-canvas) !important;
+    border-color: var(--pog-border) !important;
+    cursor: not-allowed;
+}
+
+/* Keep Chrome's autofill from repainting fields white. */
+.pog-theme input:-webkit-autofill,
+.pog-theme input:-webkit-autofill:hover,
+.pog-theme input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--pog-text);
+    -webkit-box-shadow: 0 0 0 1000px var(--pog-surface-raised) inset;
+    caret-color: var(--pog-text);
+}
+
+.pog-theme input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--pog-accent);
+    vertical-align: -2px;
+}
+
+/* ---------- OTP credential tiles ----------
+   login-otp.ftl renders a radio + `label.pf-c-tile` pair per device. The radio
+   is hidden accessibly and the label carries the selected state. */
+
+.pog-theme .pf-c-tile__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.pog-theme label.pf-c-tile {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pog-space-2);
+    width: auto;
+    margin: 0 var(--pog-space-2) var(--pog-space-2) 0;
+    padding: var(--pog-space-2) var(--pog-space-3);
+    font-size: 0.75rem;
+    font-weight: var(--pog-weight-medium);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--pog-text-secondary) !important;
+    background: var(--pog-surface-raised) !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-radius: var(--pog-radius-control) !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    transition:
+        background-color var(--pog-transition),
+        border-color var(--pog-transition);
+}
+
+.pog-theme label.pf-c-tile:hover {
+    background: var(--pog-surface-hover) !important;
+}
+
+.pog-theme .pf-c-tile__input:checked + label.pf-c-tile {
+    color: var(--pog-text) !important;
+    background: var(--pog-accent-wash) !important;
+    border-color: var(--pog-accent) !important;
+}
+
+.pog-theme .pf-c-tile__input:focus-visible + label.pf-c-tile {
+    outline: 2px solid var(--pog-accent);
+    outline-offset: 2px;
+}
+
+/* The device name sits in a nested element PatternFly colours for a white
+   tile, so let everything inside the label take the label's colour. */
+.pog-theme label.pf-c-tile * {
+    color: inherit !important;
+}
+
+.pog-theme .pf-c-tile__icon {
+    opacity: 0.7;
+}
+
+/* ---------- Password visibility toggle ---------- */
+
+/* PatternFly paints the group white; it shows through between the two children. */
+.pog-theme .pf-c-input-group {
+    background: transparent;
+}
+
+.pog-theme .pf-c-input-group > .pf-c-form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pog-theme .pf-c-button.pf-m-control {
+    height: var(--pog-control-height);
+    color: var(--pog-text-muted) !important;
+    background: var(--pog-surface-raised) !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-left: none !important;
+    border-radius: 0 var(--pog-radius-control) var(--pog-radius-control) 0;
+}
+
+.pog-theme .pf-c-button.pf-m-control:hover {
+    color: var(--pog-accent) !important;
+}
+
+/* ---------- Options row ---------- */
+
+.pog-theme .login-pf-settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pog-space-3);
+    margin-bottom: var(--pog-space-5);
+}
+
+/* Direct child only: nested spans are checkbox captions that must stay inline. */
+.pog-theme #kc-form-options > span {
+    display: block;
+}
+
+/* Keycloak's own login.css blocks *every* span inside #kc-form-options, which
+   pushes checkbox captions onto their own line. The ID keeps us ahead of it. */
+.pog-theme #kc-form-options label span {
+    display: inline;
+}
+
+.pog-theme .login-pf-settings a {
+    font-size: 0.8125rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.pog-theme .pf-c-button,
+.pog-theme input[type="submit"] {
+    height: var(--pog-control-height);
+    font-family: var(--pog-font);
+    font-size: 0.875rem;
+    font-weight: var(--pog-weight-semibold);
+    letter-spacing: 0.01em;
+    border-radius: var(--pog-radius-control);
+    transition:
+        background-color var(--pog-transition),
+        border-color var(--pog-transition),
+        color var(--pog-transition);
+}
+
+.pog-theme .pf-c-button.pf-m-primary,
+.pog-theme #kc-login {
+    display: block;
+    width: 100%;
+    color: var(--pog-accent-contrast) !important;
+    background: var(--pog-accent) !important;
+    background-image: none !important;
+    border: 1px solid var(--pog-accent) !important;
+    box-shadow: none !important;
+}
+
+.pog-theme .pf-c-button.pf-m-primary:hover:not(:disabled),
+.pog-theme #kc-login:hover:not(:disabled) {
+    background: var(--pog-accent-hover) !important;
+    border-color: var(--pog-accent-hover) !important;
+}
+
+.pog-theme .pf-c-button.pf-m-primary:active:not(:disabled),
+.pog-theme #kc-login:active:not(:disabled) {
+    background: var(--pog-accent-active) !important;
+    border-color: var(--pog-accent-active) !important;
+}
+
+.pog-theme .pf-c-button.pf-m-primary:disabled,
+.pog-theme #kc-login:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Secondary actions. Keycloak is inconsistent about which class it puts on
+   these — PatternFly's `pf-m-default`/`pf-m-secondary` and Bootstrap's
+   `btn-default` all show up depending on the page. */
+.pog-theme .pf-c-button.pf-m-default,
+.pog-theme .pf-c-button.pf-m-secondary,
+.pog-theme .pf-c-button.btn-default {
+    color: var(--pog-text) !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.pog-theme .pf-c-button.pf-m-default:hover,
+.pog-theme .pf-c-button.pf-m-secondary:hover,
+.pog-theme .pf-c-button.btn-default:hover {
+    background: var(--pog-accent-wash) !important;
+    border-color: var(--pog-accent) !important;
+}
+
+/* Link-styled buttons (print / download / copy recovery codes) default to
+   PatternFly blue. */
+.pog-theme .pf-c-button.pf-m-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pog-space-1);
+    height: auto;
+    padding: 0;
+    font-size: 0.8125rem;
+    font-weight: var(--pog-weight-medium);
+    color: var(--pog-link) !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.pog-theme .pf-c-button.pf-m-link + .pf-c-button.pf-m-link {
+    margin-left: var(--pog-space-4);
+}
+
+.pog-theme .pf-c-button.pf-m-link:hover {
+    color: var(--pog-accent) !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Full width when it is the only action, or stacked under the primary one. */
+.pog-theme .pf-c-button.pf-m-default,
+.pog-theme .pf-c-button.pf-m-secondary,
+.pog-theme #kc-form-buttons .pf-c-button.btn-default {
+    display: block;
+    width: 100%;
+    margin-top: var(--pog-space-2);
+}
+
+/* ---------- Inline validation ---------- */
+
+.pog-theme #input-error,
+.pog-theme span[id^="input-error"] {
+    display: block;
+    margin-top: var(--pog-space-2);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--pog-danger);
+}
+
+/* ---------- Alerts ---------- */
+
+/* Icon in the first column, title and description stacked in the second. */
+.pog-theme .pf-c-alert {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 var(--pog-space-2);
+    margin-bottom: var(--pog-space-4);
+    padding: var(--pog-space-3) !important;
+    font-size: 0.8125rem;
+    color: var(--pog-text) !important;
+    background: var(--pog-surface-raised) !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-radius: var(--pog-radius-control) !important;
+}
+
+/* PatternFly colours the title and icon per severity; inherit instead so a
+   single rule per variant below drives the whole alert. */
+.pog-theme .pf-c-alert__title,
+.pog-theme .pf-c-alert__icon {
+    color: inherit !important;
+}
+
+.pog-theme .pf-c-alert__title {
+    grid-column: 2;
+    margin: 0;
+    font-size: 0.8125rem !important;
+    font-weight: var(--pog-weight-semibold);
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Supporting copy stays neutral so the severity colour marks the title only. */
+.pog-theme .pf-c-alert__description {
+    grid-column: 2;
+    margin-top: var(--pog-space-1);
+    color: var(--pog-text-secondary) !important;
+}
+
+.pog-theme .pf-c-alert__description p {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: inherit;
+}
+
+.pog-theme .pf-c-alert__icon {
+    grid-row: 1;
+    grid-column: 1;
+    margin-top: 1px;
+    font-size: 0.875rem;
+}
+
+.pog-theme .pf-c-alert.pf-m-danger {
+    color: var(--pog-danger) !important;
+    background: var(--pog-danger-wash) !important;
+    border-color: var(--pog-danger-border) !important;
+}
+
+.pog-theme .pf-c-alert.pf-m-warning {
+    color: var(--pog-warning) !important;
+    background: var(--pog-warning-wash) !important;
+    border-color: var(--pog-warning-border) !important;
+}
+
+.pog-theme .pf-c-alert.pf-m-success {
+    color: var(--pog-success) !important;
+    background: var(--pog-success-wash) !important;
+    border-color: var(--pog-success-border) !important;
+}
+
+/* ---------- Identity providers ---------- */
+
+.pog-theme .kc-social-links {
+    margin-top: var(--pog-space-5);
+    padding-top: var(--pog-space-4);
+    border-top: 1px solid var(--pog-border);
+}
+
+.pog-theme .kc-social-section {
+    margin-bottom: var(--pog-space-3);
+    font-size: 0.6875rem;
+    font-weight: var(--pog-weight-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pog-text-muted);
+}
+
+.pog-theme .kc-social-links a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 var(--pog-space-3);
+    font-size: 0.8125rem;
+    font-weight: var(--pog-weight-medium);
+    color: var(--pog-text) !important;
+    text-decoration: none;
+    background: var(--pog-surface-raised) !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-radius: var(--pog-radius-control) !important;
+    transition:
+        background-color var(--pog-transition),
+        border-color var(--pog-transition);
+}
+
+.pog-theme .kc-social-links a:hover {
+    background: var(--pog-surface-hover) !important;
+    border-color: var(--pog-accent) !important;
+}
+
+.pog-theme .kc-social-links a i {
+    flex: none;
+    margin-right: var(--pog-space-2);
+    font-size: 0.9375rem;
+    color: var(--pog-text-muted);
+}
+
+/* Long provider names ("stackoverflow") would otherwise run into the icon. */
+.pog-theme .kc-social-links a span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------- Card footer (registration link) ---------- */
+
+.pog-theme #kc-info {
+    margin: var(--pog-space-5) calc(-1 * var(--pog-space-6)) calc(-1 * var(--pog-space-5));
+    border-radius: 0 0 var(--pog-radius-surface) var(--pog-radius-surface);
+    overflow: hidden;
+}
+
+.pog-theme #kc-info-wrapper {
+    padding: var(--pog-space-3) var(--pog-space-6);
+    font-size: 0.8125rem;
+    text-align: center;
+    color: var(--pog-text-muted);
+    background: rgba(0, 0, 0, 0.16);
+    border-top: 1px solid var(--pog-border);
+}
+
+.pog-theme #kc-registration {
+    margin: 0;
+}
+
+/* ---------- Locale switcher ---------- */
+
+.pog-theme #kc-locale {
+    position: absolute;
+    top: var(--pog-space-3);
+    right: var(--pog-space-4);
+}
+
+.pog-theme #kc-current-locale-link,
+.pog-theme #kc-locale-dropdown button {
+    font-family: var(--pog-font);
+    font-size: 0.6875rem !important;
+    font-weight: var(--pog-weight-medium);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--pog-text-muted) !important;
+}
+
+.pog-theme #kc-current-locale-link:hover,
+.pog-theme #kc-locale-dropdown button:hover {
+    color: var(--pog-accent) !important;
+}
+
+.pog-theme #kc-locale ul {
+    min-width: 136px;
+    padding: var(--pog-space-1) !important;
+    background-color: var(--pog-surface-raised) !important;
+    border: 1px solid var(--pog-border-strong) !important;
+    border-radius: var(--pog-radius-control) !important;
+    box-shadow: var(--pog-shadow-overlay) !important;
+}
+
+.pog-theme #kc-locale ul li a {
+    display: block;
+    padding: var(--pog-space-1) var(--pog-space-2);
+    font-size: 0.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.pog-theme #kc-locale ul li a:hover {
+    background: var(--pog-accent-wash);
+}
+
+/* ---------- Secondary pages (OTP, recovery codes, consent) ---------- */
+
+.pog-theme #kc-totp-secret-key {
+    display: block;
+    word-break: break-all;
+    font-family: var(--pog-font-mono);
+    color: var(--pog-text);
+    background: var(--pog-surface-raised);
+    border: 1px solid var(--pog-border-strong);
+    border-radius: var(--pog-radius-control);
+    padding: var(--pog-space-2) var(--pog-space-3);
+}
+
+/* Recovery codes: one bordered panel, codes in two monospace columns. */
+.pog-theme .kc-recovery-codes-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--pog-space-1) var(--pog-space-4);
+    margin: 0 0 var(--pog-space-4);
+    padding: var(--pog-space-3);
+    list-style: none;
+    background: var(--pog-surface-raised);
+    border: 1px solid var(--pog-border);
+    border-radius: var(--pog-radius-control);
+}
+
+.pog-theme .kc-recovery-codes-list li {
+    font-family: var(--pog-font-mono);
+    font-size: 0.75rem;
+    color: var(--pog-text) !important;
+}
+
+.pog-theme .kc-recovery-codes-list li span {
+    display: inline-block;
+    min-width: 1.5em;
+    color: var(--pog-text-muted) !important;
+}
+
+/* PatternFly hard-codes near-black text on list content (consent scopes,
+   recovery codes, required-action lists), which is invisible on a dark card. */
+.pog-theme .card-pf li,
+.pog-theme .card-pf dt,
+.pog-theme .card-pf dd,
+.pog-theme .card-pf strong,
+.pog-theme .card-pf .pf-c-title {
+    color: var(--pog-text-secondary);
+}
+
+.pog-theme #kc-oauth ul li {
+    padding: var(--pog-space-2) 0;
+    font-size: 0.8125rem;
+    border-bottom: 1px solid var(--pog-border);
+}
+
+.pog-theme #kc-oauth ul li:last-child {
+    border-bottom: none;
+}
+
+.pog-theme .subtitle {
+    font-size: 0.75rem;
+    color: var(--pog-text-muted);
+}
+
+.pog-theme .required {
+    color: var(--pog-accent);
+}
+
+/* Authenticator picker: a flex row of icon / label + description / chevron. */
+.pog-theme .select-auth-box-parent {
+    display: flex;
+    align-items: center;
+    gap: var(--pog-space-3);
+    width: 100%;
+    margin-bottom: var(--pog-space-2);
+    padding: var(--pog-space-3);
+    text-align: left;
+    background: var(--pog-surface-raised);
+    border: 1px solid var(--pog-border);
+    border-radius: var(--pog-radius-control);
+    transition:
+        background-color var(--pog-transition),
+        border-color var(--pog-transition);
+}
+
+.pog-theme .select-auth-box-parent:hover {
+    background: var(--pog-surface-hover);
+    border-color: var(--pog-border-strong);
+}
+
+.pog-theme .select-auth-box-icon,
+.pog-theme .select-auth-box-arrow {
+    flex: none;
+    align-items: center;
+    color: var(--pog-text-muted);
+}
+
+/* Let the label column take the free space instead of PatternFly's spacer.
+   webauthn-authenticate.ftl wraps the labels in a different element than
+   select-authenticator.ftl, so match anything that is not icon or chevron. */
+.pog-theme
+    .select-auth-box-parent
+    > *:not(.select-auth-box-icon):not(.select-auth-box-arrow) {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.pog-theme .select-auth-box-parent .pf-m-fill {
+    display: none;
+}
+
+/* On the passkey list upstream puts the chevron class on the label wrapper,
+   which draws a stray glyph above the text. Only render it on a bare icon. */
+.pog-theme .select-auth-box-parent .fa-angle-right:has(*)::before {
+    content: none;
+}
+
+.pog-theme .select-auth-box-icon i {
+    font-size: 1.125rem !important;
+}
+
+/* Font Awesome sets `font-family: FontAwesome` on `.fa`, which some Keycloak
+   markup puts on a wrapper, so the labels have to name the font explicitly. */
+.pog-theme .select-auth-box-headline,
+.pog-theme .select-auth-box-desc {
+    font-family: var(--pog-font);
+}
+
+.pog-theme .select-auth-box-headline {
+    margin-bottom: 2px;
+    font-size: 0.875rem !important;
+    font-weight: var(--pog-weight-semibold);
+    line-height: 1.4;
+    color: var(--pog-text) !important;
+}
+
+.pog-theme .select-auth-box-desc {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--pog-text-muted) !important;
+}
+
+/* ---------- Narrow viewports ---------- */
+
+@media (max-width: 480px) {
+    .pog-theme .login-pf-page {
+        padding: 0 var(--pog-space-3) 40px;
+    }
+
+    .pog-theme .card-pf {
+        padding: var(--pog-space-5) var(--pog-space-4) var(--pog-space-4);
+    }
+
+    .pog-theme #kc-header-wrapper {
+        padding: 36px var(--pog-space-2) var(--pog-space-3);
+    }
+
+    .pog-theme #kc-info {
+        margin: var(--pog-space-4) calc(-1 * var(--pog-space-4))
+            calc(-1 * var(--pog-space-4));
+    }
+
+    .pog-theme #kc-info-wrapper {
+        padding: var(--pog-space-3) var(--pog-space-4);
+    }
+}
