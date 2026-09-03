@@ -263,6 +263,19 @@
     color: var(--pog-accent) !important;
 }
 
+/* PatternFly draws this button's border on an `::after` overlay instead of the
+   element: near-white on three sides, plus a 2px blue bottom edge on hover,
+   focus and active. Our border is on the button itself, so drop the overlay and
+   put the focus ring back in the theme's accent. */
+.pog-theme .pf-c-button.pf-m-control::after {
+    display: none;
+}
+
+.pog-theme .pf-c-button.pf-m-control:focus-visible {
+    outline: 2px solid var(--pog-accent);
+    outline-offset: -2px;
+}
+
 /* ---------- Options row ---------- */
 
 .pog-theme .login-pf-settings {
