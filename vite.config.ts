@@ -7,6 +7,9 @@ export default defineConfig({
     plugins: [
         react(),
         keycloakify({
+            themeName: "poggroup",
+            themeVersion: "27.0.0",
+            groupId: "com.pog-group.keycloak",
             accountThemeImplementation: "none"
         })
     ]

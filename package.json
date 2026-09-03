@@ -1,11 +1,7 @@
 {
-    "name": "keycloakify-starter",
-    "version": "0.0.0",
-    "description": "Starter for Keycloakify 11",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
-    },
+    "name": "keycloak-poggroup-theme",
+    "version": "27.0.0",
+    "description": "POG Group Keycloak login theme",
     "type": "module",
     "scripts": {
         "postinstall": "keycloakify sync-extensions",
