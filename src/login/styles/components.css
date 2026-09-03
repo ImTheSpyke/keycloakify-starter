@@ -581,7 +581,18 @@
     color: var(--pog-accent) !important;
 }
 
+/* Keycloak leaves this list in the flow and only toggles `display`, so opening
+   it grew the card and pushed the whole page into scrolling. Lift it out as an
+   overlay under the button, and cap its height: a realm with every locale
+   enabled lists 30 of them, which is taller than most viewports. */
 .pog-theme #kc-locale ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    max-height: min(280px, 50vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     min-width: 136px;
     padding: var(--pog-space-1) !important;
     background-color: var(--pog-surface-raised) !important;
@@ -747,7 +758,7 @@
 
 @media (max-width: 480px) {
     .pog-theme .login-pf-page {
-        padding: 0 var(--pog-space-3) 40px;
+        padding: var(--pog-space-5) var(--pog-space-3);
     }
 
     .pog-theme .card-pf {
@@ -755,7 +766,7 @@
     }
 
     .pog-theme #kc-header-wrapper {
-        padding: 36px var(--pog-space-2) var(--pog-space-3);
+        padding: 0 var(--pog-space-2) var(--pog-space-3);
     }
 
     .pog-theme #kc-info {

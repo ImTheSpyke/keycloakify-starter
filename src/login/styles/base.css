@@ -56,10 +56,18 @@ html.pog-theme body {
 
 /* ---------- Shell ---------- */
 
+/* Centred vertically as well as horizontally. `min-height` rather than
+   `height`, so a tall page (register, recovery codes) grows past the viewport
+   and scrolls normally instead of having its top cut off. */
 .pog-theme .login-pf-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
     max-width: 408px;
     margin: 0 auto;
-    padding: 0 var(--pog-space-5) 64px;
+    padding: var(--pog-space-6) var(--pog-space-5);
 }
 
 /* ---------- Realm title ----------
@@ -73,7 +81,7 @@ html.pog-theme body {
 }
 
 .pog-theme #kc-header-wrapper {
-    padding: 56px var(--pog-space-3) var(--pog-space-4);
+    padding: 0 var(--pog-space-3) var(--pog-space-4);
     font-size: 0.75rem;
     font-weight: var(--pog-weight-semibold);
     line-height: 1.4;
